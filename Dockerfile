@@ -1,16 +1,13 @@
 # Usar una imagen base de OpenJDK
-FROM maven:3.8.3-openjdk-17 as maven_builder
+FROM maven:3.9.5-openjdk-17 as maven_builder
 
-RUN mvn clean install
-RUN mv target/*.jar target/application.jar  # <-- add
+COPY . .
 
-FROM openjdk:17-jdk-alpine as builder
-WORKDIR /app
-COPY --from=maven_builder /app/target/application.jar ./
-RUN java -Djarmode=layertools -jar application.jar extract
+RUN mvn clean package -DskipTests
 
-FROM openjdk:17-jdk-alpine
-WORKDIR /app
+FROM openjdk:17.0.1-jdk-slim
+
+COPY /target/retocp24-0.0.3.jar app.jar
 
 # Exponer el puerto en el que la aplicación se ejecutará
 EXPOSE 8080
