@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.cineplanet</groupId>
 	<artifactId>retocp24</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<name>retocp24</name>
 	<description>Reto Cineplanet Backend 2024</description>
 	<properties>
