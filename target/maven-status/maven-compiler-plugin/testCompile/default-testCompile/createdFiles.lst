@@ -1,0 +1,7 @@
+com\cineplanet\retocp24\Retocp24ApplicationTests.class
+com\cineplanet\retocp24\repository\impl\PedidosServiceTest.class
+com\cineplanet\retocp24\entity\PedidosTest.class
+com\cineplanet\retocp24\entity\ProductosTest.class
+com\cineplanet\retocp24\repository\impl\ProductosServiceTest.class
+com\cineplanet\retocp24\repository\impl\ClienteServiceTest.class
+com\cineplanet\retocp24\entity\ClienteTest.class

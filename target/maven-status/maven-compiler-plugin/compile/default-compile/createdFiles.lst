@@ -1,0 +1,15 @@
+com\cineplanet\retocp24\Retocp24Application.class
+com\cineplanet\retocp24\entity\Cliente.class
+com\cineplanet\retocp24\repository\ClienteRepository.class
+com\cineplanet\retocp24\repository\impl\ProductosService.class
+com\cineplanet\retocp24\config\SwaggerConfig.class
+com\cineplanet\retocp24\expose\PedidosController.class
+com\cineplanet\retocp24\entity\Pedidos.class
+com\cineplanet\retocp24\expose\ProductosController.class
+com\cineplanet\retocp24\expose\ClienteController.class
+com\cineplanet\retocp24\repository\impl\PedidosService.class
+com\cineplanet\retocp24\Utils\AuthUtil.class
+com\cineplanet\retocp24\repository\ProductosRepository.class
+com\cineplanet\retocp24\repository\impl\ClienteService.class
+com\cineplanet\retocp24\repository\PedidosRepository.class
+com\cineplanet\retocp24\entity\Productos.class
