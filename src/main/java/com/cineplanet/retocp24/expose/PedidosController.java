@@ -4,7 +4,10 @@ import com.cineplanet.retocp24.entity.Pedidos;
 import com.cineplanet.retocp24.entity.Pedidos;
 import com.cineplanet.retocp24.repository.impl.PedidosService;
 import com.cineplanet.retocp24.repository.impl.PedidosService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/pedidos")
+@Tag(name = "Pedido Management System", description = "Operations pertaining to order in Pedido Management System")
 public class PedidosController {
 
     @Autowired
@@ -21,6 +25,20 @@ public class PedidosController {
     @GetMapping
     public List<Pedidos> getAllPedidoss() {
         return pedidosService.findAll();
+    }
+
+    @GetMapping("/paged")
+    public ResponseEntity<Page<Pedidos>> getAllPedidos(Pageable pageable) {
+        Page<Pedidos> pedidos = pedidosService.findAll(pageable);
+        return ResponseEntity.ok(pedidos);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Pedidos>> searchPedidos(
+            @RequestParam(required = false) Integer cantidad,
+            @RequestParam(required = false) Long clienteId) {
+        List<Pedidos> pedidos = pedidosService.searchPedidos(cantidad, clienteId);
+        return ResponseEntity.ok(pedidos);
     }
 
     @GetMapping("/{id}")

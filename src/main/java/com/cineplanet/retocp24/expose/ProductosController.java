@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,33 +17,48 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/productos")
-@Tag(name = "Producto Management System", description = "Operations pertaining to product in Producto Management System")
+@Tag(name = "Producto Management API", description = "Operaciones relativas al producto en Producto Management API")
 @Slf4j
 public class ProductosController {
 
     @Autowired
     private ProductosService productosService;
 
-    @Operation(summary = "Ver una lista de productos disponibles", tags = { "Producto Management System" })
+    @Operation(summary = "Ver lista de productos disponibles", tags = { "Producto Management API" })
     @GetMapping
     public List<Productos> getAllProductos() {
         return productosService.findAll();
     }
 
-    @Operation(summary = "Get a product by Id", description = "Get product by ID", tags = { "Producto Management System" })
+
+    @GetMapping("/paged")
+    public ResponseEntity<Page<Productos>> getAllProductos(Pageable pageable) {
+        Page<Productos> productos = productosService.findAll(pageable);
+        return ResponseEntity.ok(productos);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Productos>> searchProductos(
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) Double precio) {
+        List<Productos> productos = productosService.searchProductos(nombre, precio);
+        return ResponseEntity.ok(productos);
+    }
+
+    @Operation(summary = "Obtener un producto por ID", description = "Obtener un producto por ID", tags = { "Producto Management API" })
     @GetMapping("/{id}")
     public ResponseEntity<Productos> getProductoById(@PathVariable Long id) {
         Optional<Productos> productos = productosService.findById(id);
         return productos.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Add a product", description = "Create a new product", tags = { "Producto Management System" })
+    @Operation(summary = "Agregar un producto", description = "Crea un nuevo producto", tags = { "Producto Management API" })
     @PostMapping
     public Productos createProducto(@RequestBody Productos producto) {
         return productosService.save(producto);
     }
 
-    @Operation(summary = "Update a product", description = "Update an existing product", tags = { "Producto Management System" })
+    @Operation(summary = "Actualizar un producto", description = "Actualiza un producto existente", tags = { "Producto Management API" })
     @PutMapping("/{id}")
     public ResponseEntity<Productos> updateProducto(@PathVariable Long id, @RequestBody Productos productoDetails) {
         Optional<Productos> producto = productosService.findById(id);
@@ -55,7 +72,7 @@ public class ProductosController {
         }
     }
 
-    @Operation(summary = "Delete a product", description = "Delete a product by ID", tags = { "Producto Management System" })
+    @Operation(summary = "Elimina un producto", description = "Elimina un producto por ID", tags = { "Producto Management API" })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProducto(@PathVariable Long id) {
         if (productosService.findById(id).isPresent()) {

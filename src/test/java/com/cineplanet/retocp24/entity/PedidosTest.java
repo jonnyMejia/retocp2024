@@ -13,7 +13,7 @@ public class PedidosTest {
         pedidos.setCodigoProducto(1L);
         pedidos.setCantidad(1);
 
-        Cliente cliente = new Cliente("Cliente Nombre", "Cliente Apellido");
+        Cliente cliente = new Cliente("Cliente Nombre", "Cliente Apellido", "Email");
 
         pedidos.setCliente(cliente);
 

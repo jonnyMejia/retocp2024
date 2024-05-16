@@ -32,7 +32,7 @@ public class PedidosServiceTest {
 
     @Test
     public void testFindAll() {
-        Cliente cliente = new Cliente("John Doe", "john@example.com");
+        Cliente cliente = new Cliente("John Doe", "","john@example.com");
         Pedidos pedido1 = new Pedidos(1L, 10, cliente);
         Pedidos pedido2 = new Pedidos(2L, 20, cliente);
         List<Pedidos> pedidos = Arrays.asList(pedido1, pedido2);
@@ -46,7 +46,7 @@ public class PedidosServiceTest {
 
     @Test
     public void testFindById() {
-        Cliente cliente = new Cliente("John Doe", "john@example.com");
+        Cliente cliente = new Cliente("John Doe", "","john@example.com");
         Pedidos pedido = new Pedidos(1L, 10, cliente);
         when(pedidoRepository.findById(1L)).thenReturn(Optional.of(pedido));
 
@@ -58,7 +58,7 @@ public class PedidosServiceTest {
 
     @Test
     public void testSave() {
-        Cliente cliente = new Cliente("John Doe", "john@example.com");
+        Cliente cliente = new Cliente("John Doe", "","john@example.com");
         Pedidos pedido = new Pedidos(1L, 10, cliente);
         when(pedidoRepository.save(pedido)).thenReturn(pedido);
 

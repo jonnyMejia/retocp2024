@@ -13,6 +13,6 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("Cineplanet Management API")
                         .version("1.0")
-                        .description("API para la gestión de productos"));
+                        .description("API para la gestión de Pedidos Cineplanet"));
     }
 }

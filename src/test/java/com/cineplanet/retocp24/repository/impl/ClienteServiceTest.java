@@ -31,8 +31,8 @@ public class ClienteServiceTest {
 
     @Test
     public void testFindAll() {
-        Cliente cliente1 = new Cliente("John Doe", "Apellido");
-        Cliente cliente2 = new Cliente("Jane Doe", "Apellido");
+        Cliente cliente1 = new Cliente("John Doe", "Apellido", "");
+        Cliente cliente2 = new Cliente("Jane Doe", "Apellido", "");
         List<Cliente> clientes = Arrays.asList(cliente1, cliente2);
 
         when(clienteRepository.findAll()).thenReturn(clientes);
@@ -44,7 +44,7 @@ public class ClienteServiceTest {
 
     @Test
     public void testFindById() {
-        Cliente cliente = new Cliente("John Doe", "Apellido");
+        Cliente cliente = new Cliente("John Doe", "Apellido", "");
         when(clienteRepository.findById(1L)).thenReturn(Optional.of(cliente));
 
         Optional<Cliente> result = clienteService.findById(1L);
@@ -55,7 +55,7 @@ public class ClienteServiceTest {
 
     @Test
     public void testSave() {
-        Cliente cliente = new Cliente("John Doe", "Apellido");
+        Cliente cliente = new Cliente("John Doe", "Apellido", "");
         when(clienteRepository.save(cliente)).thenReturn(cliente);
 
         Cliente result = clienteService.save(cliente);

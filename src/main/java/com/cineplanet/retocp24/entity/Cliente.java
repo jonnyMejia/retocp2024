@@ -18,14 +18,25 @@ public class Cliente {
 
     private String apellido;
 
+    private String direccion;
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
     // Constructor por defecto
     public Cliente() {
     }
 
     // Constructor con parámetros
-    public Cliente(String nombre, String email) {
+    public Cliente(String nombre, String apellido, String direccion) {
         this.nombre = nombre;
-        this.apellido = email;
+        this.apellido = apellido;
+        this.direccion = direccion;
     }
 
     // Getters y Setters
